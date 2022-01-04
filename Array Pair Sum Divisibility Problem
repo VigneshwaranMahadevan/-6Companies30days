@@ -1,0 +1,15 @@
+class Solution {
+  public:
+    bool canPair(vector<int> nums, int k) {
+        // Code here.
+        if(nums.size()%2) return 0;
+        vector<int> count(k);
+        for(auto n:nums) count[n%k]++;
+        int l=1,r=k-1;
+        
+        if(k%2==0 and count[k/2]%2) return 0;
+        while(l<r)
+            if(count[l++]!=count[r--]) return 0;
+        return 1;
+    }
+};
