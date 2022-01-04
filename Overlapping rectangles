@@ -1,0 +1,34 @@
+class Solution {
+  public:
+    int doOverlap(int L1[], int R1[], int L2[], int R2[]) {
+        // code here
+        
+        //Rectangle
+        //xa ya -> bottom left
+        //xa yb - top left
+        //xb yb - top right
+        //xb ya - bottom right
+        
+        //xa -> left most x
+        //xb -> right most x
+        //ya -> bottom most y
+        //yb -> top most y
+        
+        // L1 = xa yb
+        // R1 = xb ya
+        
+        int x1a=L1[0],y1b=L1[1],x1b=R1[0],y1a=R1[1];
+        
+        int x2a=L2[0],y2b=L2[1],x2b=R2[0],y2a=R2[1];
+        
+        //if(x1a==x1b || y1a==y1b || x2a==x2b || y2a==y2b) return 0;
+        
+        if(x2b <x1a || x1b < x2a) return 0;
+        else if( (x2b==x1a || x1b==x2a) && (y1a<=y2a<=y1b || y1a<=y2b<=y1b)) return 1;
+        
+        if(y1a > y2b || y2a>y1b ) return 0;
+        else if( (y2b==y1a || y1b==y2a) && (x1a<=x2a<=x1b || x1a<=x2b<=x1b)) return 1;
+        
+        return 1;
+    }
+};
