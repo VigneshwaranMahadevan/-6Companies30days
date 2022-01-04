@@ -1,0 +1,21 @@
+class Solution {
+	public:
+		long long CountWays(string str){
+		int n = str.size();
+        vector<unsigned long long> dp(n+1);
+        dp[n] = 1;
+        
+        for(int i=n-1;i>=0;i--){
+            
+            dp[i] = str[i]!='0'? dp[i+1]:0;
+            dp[i] = (dp[i]+1000000007)%1000000007;
+            
+            if(i<n-1 && (str[i]=='1' || str[i] == '2' && str[i+1]<'7')) dp[i]+=dp[i+2];
+            dp[i] = (dp[i]+1000000007)%1000000007;
+            
+        }
+        
+        return str.empty() ? 0:(dp[0] + 1000000007)%(1000000007);
+		}
+
+};
