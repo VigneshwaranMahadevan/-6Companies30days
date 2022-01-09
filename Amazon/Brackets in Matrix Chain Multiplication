@@ -1,0 +1,42 @@
+class Solution{
+public:
+
+    void print(int i,int j,int n,int bracket[101][101],char& name,string &s){
+        if(i==j){
+            s.push_back(name++);
+            return;
+        }
+        s.push_back('(');
+        print(i,bracket[i][j],n,bracket,name,s);
+        print(bracket[i][j]+1,j,n,bracket,name,s);
+        s.push_back(')');
+    }
+    
+    string matrixChainOrder(int p[], int n){
+        // code here
+        
+        int m[101][101];
+        int bracket[101][101];
+        
+        for(int i=1;i<n;i++) m[i][i] = 0;
+        
+        for(int l=2;l<n;l++){
+            for(int i=1;i<n-l+1;i++){
+                int j = i+l-1;
+                m[i][j] = INT_MAX;
+                for(int k=i;k<j;k++){
+                    int q = m[i][k]+p[i-1]*p[k]*p[j]+m[k+1][j];
+                    if(q<m[i][j]){
+                        m[i][j]=q;
+                        bracket[i][j]=k;
+                    }
+                }
+            }
+        }
+        
+        char name = 'A';
+        string s;
+        print(1,n-1,n,bracket,name,s);
+        return s;
+    }
+};
