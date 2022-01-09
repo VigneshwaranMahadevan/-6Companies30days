@@ -1,0 +1,20 @@
+class Solution {
+  public:
+    int maxProfit(int K, int N, int A[]) {
+        if(N<=1) return 0;
+        
+        int ans=0;
+        
+        vector<vector<int>> f(K+1, vector<int>(N,0));
+        for(int k=1;k<=K;k++){
+            int tmpMax = f[k-1][0] - A[0];
+            for(int i=1;i<N;i++){
+                f[k][i] = max(f[k][i-1], A[i]+tmpMax);
+                tmpMax = max(tmpMax, f[k-1][i] - A[i]);
+                ans = max(ans,f[k][i]);
+            }
+        }
+        
+        return ans;
+    }
+};
