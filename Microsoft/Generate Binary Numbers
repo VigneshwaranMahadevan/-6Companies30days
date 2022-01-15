@@ -1,0 +1,14 @@
+vector<string> generate(int N)
+{
+    queue<string> q; 
+    q.push("1");
+    vector<string> res;
+    while(N--){
+        string front=q.front();q.pop();
+        res.push_back(front);
+        string frontDup = front;
+        q.push(front+"0");
+        q.push(frontDup+"1");
+    }
+    return res;
+}
