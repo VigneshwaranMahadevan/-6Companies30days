@@ -1,0 +1,17 @@
+class Solution {
+public:
+	bool isPossible(int n, vector<pair<int, int> >& p) {
+	    // Code here
+	    vector<vector<int>> G(n);
+	    vector<int> degree(n,0),bfs;
+	    for(auto &e: p)
+	        G[e.second].push_back(e.first), degree[e.first]++;
+	    for(int i=0;i<n;i++) if(!degree[i]) bfs.push_back(i);
+	    for(int i=0;i<bfs.size();i++)
+	        for(int j: G[bfs[i]])
+	            if(--degree[j]==0)
+	                bfs.push_back(j);
+	   return bfs.size() == n;
+	    
+	}
+};
