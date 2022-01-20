@@ -1,0 +1,25 @@
+class Solution{
+  public:
+    string nextPalin(string str) { 
+        //complete the function here
+        if(str.length()<=3) return "-1";
+        
+        string res;
+        int mid = str.length()/2;
+        
+        string firstHalf = str.substr(0,mid);
+        string prevFirstHalf = firstHalf;
+        next_permutation(firstHalf.begin(),firstHalf.end());
+        
+        if(firstHalf<=prevFirstHalf) return "-1";
+        res+=firstHalf;
+        if(str.length()%2) res+=str[mid];
+        
+        string secondHalf = firstHalf;
+        reverse(secondHalf.begin(),secondHalf.end());
+        res+=secondHalf;
+        
+        return res;
+        
+    }
+};
