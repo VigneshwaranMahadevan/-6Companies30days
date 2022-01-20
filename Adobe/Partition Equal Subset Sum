@@ -1,0 +1,17 @@
+class Solution{
+public:
+    int equalPartition(int N, int arr[])
+    {
+        // code here
+        bitset<100001> bits(1);
+        int sum=0;
+        for(int i=0;i<N;i++){
+            sum+=arr[i];
+            bits |= (bits<<arr[i]);
+        } 
+        if(sum%2) return 0;
+        else if(bits[sum/2]) return 1;
+        return 0;
+        
+    }
+};
