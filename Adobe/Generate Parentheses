@@ -1,0 +1,18 @@
+class Solution
+{
+    vector<string> dp[15];
+    public:
+    vector<string> AllParenthesis(int n) 
+    {
+        vector<string> ans;
+        if(!dp[n].empty()) return dp[n];
+        if(!n) ans.push_back("");
+        else{
+            for(int c=0;c<n;c++)
+                for(string left: AllParenthesis(c))
+                    for(string right: AllParenthesis(n-1-c))
+                        ans.push_back(left+"("+right+")");
+        }
+        return dp[n]=ans;
+    }
+};
