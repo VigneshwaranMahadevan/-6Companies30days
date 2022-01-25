@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int shipWithinDays(vector<int>& weights, int days) {
+        int left = *max_element(weights.begin(),weights.end());
+        int right = accumulate(weights.begin(),weights.end(),0);
+        
+        while(left<right){
+            int capacity = (left+right)/2;
+            int need = 1, cur=0;
+            for(int i=0;i<weights.size() && need<=days; cur+=weights[i++])
+                if(cur+weights[i]>capacity)
+                    cur=0,need++;
+            if(need>days) 
+                left=capacity+1;
+            else right=capacity;
+        }
+        return left;
+    }
+};
