@@ -1,0 +1,25 @@
+class Solution {
+    vector<vector<int>> _grid;
+    array<Node*,2> _leafNodes;
+public:
+    Node* construct(vector<vector<int>>& grid) {
+        _grid = move(grid);
+        _leafNodes[0] = new Node(0,1);
+        _leafNodes[1] = new Node(1,1);
+        return construct(0,0,_grid.size());
+    }
+    
+    Node* construct(int r,int c,int s){
+        if(s==1)
+            return _leafNodes[_grid[r][c]];
+        s/=2;
+        Node* tl = construct(r,c,s);
+        Node* tr = construct(r,c+s,s);
+        Node* bl = construct(r+s,c,s);
+        Node* br = construct(r+s,c+s,s);
+        if(tl==tr && tl==bl && tl==br) return tl;
+        return new Node(0,0,tl,tr,bl,br);
+    }
+    
+    
+};
