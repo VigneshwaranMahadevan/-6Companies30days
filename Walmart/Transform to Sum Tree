@@ -1,0 +1,24 @@
+class Solution {
+  public:
+  
+    // Convert a given tree to a tree where every node contains sum of values of
+    // nodes in left and right subtrees in the original tree
+    
+    int func(Node* node){
+        int x,y,sum=0;
+        if(node){
+            x = func(node->left);
+            y = func(node->right);
+            sum = node->data+x+y;
+            node->data=x+y;
+            return sum;
+        }
+        return 0;
+    }
+    
+    void toSumTree(Node *node)
+    {
+        // Your code here
+        func(node);
+    }
+};
