@@ -1,0 +1,23 @@
+class Solution {
+    
+    static bool cmp(string a,string b){
+        
+        if(a.size()!=b.size()){
+            return a.size()<b.size();
+        }else{
+            return a<b;
+        }
+        return 0;
+    }
+    
+public:
+    
+    
+    
+    string kthLargestNumber(vector<string>& nums, int k) {
+        sort(nums.begin(),nums.end(),cmp);
+       //cout<<nums.size()<<k<<endl;
+        return nums[nums.size()-k];
+        
+    }
+};
